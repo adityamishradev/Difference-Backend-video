@@ -105,11 +105,15 @@ function App() {
   const [message, setMessage] = useState('');
 
   useEffect(() => {
-    fetch('http://localhost:5000/api/message')
-      .then(res => res.json())
-      .then(data => setMessage(data.message))
-      .catch(err => console.error(err));
+    fetch('http://localhost:3000/api/product/get-item') // 👈 backend port check karo
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Products from backend:", data); // 👈 ab yahan sahi jagah pe hai
+        setMessage(data.message || "Data received successfully!");
+      })
+      .catch((err) => console.error("Error fetching data:", err));
   }, []);
+
 
   return (
     <div style={{ textAlign: 'center', marginTop: '50px' }}>
